@@ -6,6 +6,7 @@ public class BlockController : MonoBehaviour {
 
     private Vector3 targetPosition;
     private Quaternion targetRotation;
+    private Vector3 targetLocation;
 
     private void Start()
     {
@@ -40,10 +41,13 @@ public class BlockController : MonoBehaviour {
         if (Input.GetKeyDown("space"))
         {
             RaycastHit hit;
-            if (Physics.Raycast (transform.position, -Vector3.up, out hit))
+            if (Physics.Raycast (transform.position, Vector3.down, out hit))
             {
-                Instantiate(this, hit.point, Quaternion.identity);
+                targetLocation = hit.point;
+                
             }
+            //targetLocation += new Vector3(0, transform.localScale.y / 2, 0);
+            transform.position = targetLocation;
 
         }
     }
